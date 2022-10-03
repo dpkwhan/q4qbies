@@ -1,0 +1,12 @@
+feature isdir
+
+  should check whether an given path is a directory
+    expect an empty directory is a directory
+      isdir hsym `$system["cd"],"/.fs"
+      
+    expect a non-empty directory is a directory
+      isdir hsym `$system["cd"],"/.fs.test"
+      
+    expect a file is not a directory
+      not isdir hsym `$system["cd"],"/.fs.test/isdir.quke"
+      

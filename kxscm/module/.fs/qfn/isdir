@@ -1,0 +1,8 @@
+// @author David Han
+// @kind function
+// @fileOverview Check whether a path is a directory.
+// @param path {hsym} a path
+// @returns {boolean} True if the path is a directory and false otherwise.
+{[path]
+  not any (();path)~\:key path
+  }
