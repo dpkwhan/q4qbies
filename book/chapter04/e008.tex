@@ -1,0 +1,18 @@
+\section{Check whether a path is a directory}
+
+\begin{minted}[samepage,frame=single,framesep=10pt,xleftmargin=10pt,linenos]{q}
+.qq.fs.isdir:{[path]
+  not any (();path)~\:key path
+  };
+\end{minted}
+
+\subsection{Summary}
+
+\begin{noteblock}
+\textbf{Knowledge Points}
+\begin{itemize}
+\item Objects in a folder: \href{https://code.kx.com/q/ref/key/#files-in-a-folder}{\q{key}}
+\end{itemize}
+\end{noteblock}
+
+\clearpage

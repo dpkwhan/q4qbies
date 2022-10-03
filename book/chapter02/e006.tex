@@ -1,0 +1,72 @@
+\section{Add a New Key to a Dictionary}
+
+Suppose you have an existing dictionary \q{d} as follows:
+
+\begin{minted}[frame=lines,framesep=10pt,xleftmargin=10pt]{q}
+q) d:`firstName`lastName!`John`Chang
+q) d
+firstName| John
+lastName | Chang
+\end{minted}
+
+Now we want to add another key to this dictionary to indicate the age, say, 
+\begin{minted}[frame=lines,framesep=10pt,xleftmargin=10pt]{q}
+q) d[`age]:30;
+'type
+    [0]  d[`age]:30;
+                ^
+\end{minted}
+Unfortunately, \q{q} complains with a \q{type} error. This is because
+\begin{itemize}
+\item The existing dictionary is uniform, and
+\item The value type of new item is different from the value type of the existing dictionary
+\end{itemize}
+
+
+\subsection{Mixed value types}
+When the existing dictionary has mixed values, it is Okay to directly insert a new item.
+
+\begin{minted}[frame=lines,framesep=10pt,xleftmargin=10pt]{q}
+q) d2:`firstName`lastName`zip!(`John;`Chang;10583);
+q) d2
+firstName| `John
+lastName | `Chang
+zip      | 10583
+
+q) d2[`age]:30; /add a new item
+q) d2
+firstName| `John
+lastName | `Chang
+zip      | 10583
+age      | 30
+\end{minted}
+
+
+\subsection{Uniform value type}
+When the value type of the new item is different from the value type of the existing dictionary, we can create a second dictonary with the new key and then merge this dictionary with the existing dictionary. For example
+
+\begin{minted}[frame=lines,framesep=10pt,xleftmargin=10pt]{q}
+q) d:`firstName`lastName!`John`Chang
+q) d
+firstName| John
+lastName | Chang
+
+q) d,enlist[`age]!enlist 30
+firstName| `John
+lastName | `Chang
+age      | 30
+\end{minted}
+
+
+\subsection{Summary}
+When the value type of a dictionary is not known in advance, the second approach provides a more robust way to insert a new entry to an existing dictionary.
+
+\begin{noteblock}
+\textbf{Knowledge Points}
+\begin{itemize}
+\item Make a list: \href{https://code.kx.com/q/ref/enlist/}{\q{enlist}}
+\item Join: \href{https://code.kx.com/q/ref/join/}{\q{,}}
+\end{itemize}
+\end{noteblock}
+
+\clearpage

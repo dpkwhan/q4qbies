@@ -1,0 +1,61 @@
+\section{Create a Dictionary}
+
+There are multiple different ways to create a dictionary in q and I will explain each of them in this example. The first and foremost, the basic definition of a dictionary using \q{!}, \emph{i.e.} \q{x!y} or \q{![x;y]}.
+
+
+\subsection{Basic method}
+\begin{minted}[frame=single,framesep=10pt,xleftmargin=10pt,linenos]{q}
+`a`b`c`d`e!5 4 3 2 1
+\end{minted}
+
+Or alternatively,
+\begin{minted}[frame=single,framesep=10pt,xleftmargin=10pt,linenos]{q}
+![`a`b`c`d`e;5 4 3 2 1]
+\end{minted}
+
+
+\subsection{Dot apply}
+Here \q{.} applies an operator or function to a list of arguments. Line 1 uses function projection.
+
+\begin{minted}[frame=single,framesep=10pt,xleftmargin=10pt,linenos]{q}
+.[!](`a`b`c`d`e;5 4 3 2 1)
+.[!;(`a`b`c`d`e;5 4 3 2 1)]
+\end{minted}
+
+
+\subsection{Over accumulator}
+The \q{over} derives an accumulator from a binary function. In the example below, it basically performs two evaluations sequentially:
+\begin{itemize}
+\item the list \q{`a`b`c`d`e} is returned since it is the first element
+\item In the second evaluation, the result of first evaluation becomes the left argument and the right argument is the second element from the list, \emph{i.e.} \q{5 4 3 2 1}
+\end{itemize}
+\begin{minted}[frame=single,framesep=10pt,xleftmargin=10pt,linenos]{q}
+(!/)(`a`b`c`d`e;5 4 3 2 1)
+\end{minted}
+
+
+\subsection{Dot apply again}
+This is basically the same as above except a few notable points:
+\begin{itemize}
+\item function \q{flip} is used to create a list of lists. In this case, the list has two elements and the first element will be used as key and the second element will be used value in the dictionary contruction. This is quite useful when you have a long list of keys/values and it is less error prone when a pair is used.
+\item Line 1 is basically a prefix notation \q{v[x;y]} and line 2 uses an infix notation \q{x v y} where the operator \q{v} is \q{.} apply.
+\end{itemize}
+\begin{minted}[frame=single,framesep=10pt,xleftmargin=10pt,linenos]{q}
+.[!] flip ((`a;5);(`b;4);(`c;3);(`d;2);(`e;1))
+(!). flip ((`a;5);(`b;4);(`c;3);(`d;2);(`e;1))
+\end{minted}
+
+
+\subsection{Summary}
+
+\begin{noteblock}
+\textbf{Knowledge Points}
+\begin{itemize}
+\item Make a dictionary: \href{https://code.kx.com/q/ref/dict/#dict}{\q{x!y}}
+\item Dot apply: \href{https://code.kx.com/q/ref/apply/}{\q{.}}
+\item Over accumulator: \href{https://code.kx.com/q/ref/accumulators/#binary-values}{\q{/}}
+\item Flip: \href{https://code.kx.com/q/ref/flip/}{\q{flip}}
+\end{itemize}
+\end{noteblock}
+
+\clearpage

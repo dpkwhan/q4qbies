@@ -1,0 +1,16 @@
+\section{Find Files Recursively}
+
+\begin{minted}[samepage,frame=single,framesep=10pt,xleftmargin=10pt,linenos]{q}
+.qlib.fs.isdir:{
+  not any (();x)~\:key x
+  };
+
+.qlib.fs.walkdir:{[folder]
+  folderContents:` sv/:folder,/:key folder;
+  folders:folderContents where .qlib.fs.isdir each folderContents;
+  files:folderContents except folders;
+  files,.z.s each folders
+  };
+\end{minted}
+
+\clearpage

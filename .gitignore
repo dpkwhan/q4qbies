@@ -1,0 +1,9 @@
+book/*.pdf
+book/*.gz
+book/*.toc
+book/*.aux
+book/*/*.aux
+book/*.log
+book/*.bak
+book/*.out
+book/_minted-q4qbies/

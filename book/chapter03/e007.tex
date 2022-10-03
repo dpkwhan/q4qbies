@@ -1,0 +1,22 @@
+\section{Conditional Selection}
+
+
+\begin{minted}[samepage,frame=single,framesep=10pt,xleftmargin=10pt,linenos]{q}
+// A form of the conditional:
+("j"$a=b) foo/bar  / ?[a=b;foo bar;bar]
+a:2;
+b:1;
+foo:{x*x};
+bar:1 2 3;
+("j"$a=b) foo/bar
+
+select time,side,sign:(-1;1)[side=`buy] from trade
+
+select time,side,sign:?[side=`buy;1;-1] from trade
+
+$[a=b;`equal;`notequal]
+
+\end{minted}
+
+
+\clearpage

@@ -1,0 +1,82 @@
+\section{Identity Matrix}
+\label{example:LinearInterpolcation}
+
+In linear algebra, an identity matrix of size 3 looks like:
+
+$$
+\left[
+\begin{matrix}
+1 & 0 & 0\\
+0 & 1 & 0\\
+0 & 0 & 1\\
+\end{matrix}
+\right]
+$$
+
+
+\subsection{Implementation}
+Below is the function to create an identity matrix of any given size $n$.
+
+\begin{minted}[samepage,frame=single,framesep=10pt,xleftmargin=10pt,linenos]{q}
+.qe.math.identity:{[n]
+  `float$v=/:v:til n
+  };
+\end{minted}
+
+And the output \q{.qe.math.identity[4]} is
+
+\begin{verbatim}
+1 0 0 0 
+0 1 0 0 
+0 0 1 0 
+0 0 0 1 
+\end{verbatim}
+
+
+\subsection{Explanations}
+Let's look at this function in details.
+
+\begin{itemize}
+\item \begin{minted}{q}
+v:til n
+\end{minted}
+\q{til n} returns all integers from zero up to $n$, but not including $n$ and assigns the list of integers to variable \q{v}. Note that the assignment operator returns the result of the expression assigned to $v$, which is later used by other expression to the left.
+
+\item \begin{minted}{q}
+v=/:v
+\end{minted}
+The list \q{v} is compared with each element of itself. So the returned value is a list of list of boolean values. For example, when \q{v} is compared with $v_i$ where $i = 0, 1, \cdots, n-1$, a list of boolean values is returned and the $i^{th}$ element is \q{1b} and \q{0b} elsewhere. Let $m_{ij}$ denote the element $j$ of the inner list, which is the element $i$ of the outer list, then 
+
+$$
+m_{ij} = 
+\begin{cases}
+\enspace \q{1b} & \text{ if } i=j, \\
+\enspace \q{0b} & \text{ else. }
+\end{cases}
+$$
+
+\item The result is an $n$x$n$ matrix of boolean values, which is then casted to a matrix of floating point numbers. The boolean value \q{1b} is casted to \q{1f} and \q{0b} is casted to \q{0f}.
+\end{itemize}
+
+
+\subsection{Summary}
+
+\begin{importantblock}
+\textbf{Important Note}
+\begin{itemize}
+\item For some matrix operators like \q{mmu}, \q{inv} and \q{$}, the matrix entries must of \q{float} type, \emph{i.e.} \q{all 9h=type each m} must be true if \q{m} is a matrix.
+\end{itemize}
+\end{importantblock}
+
+\begin{noteblock}
+\textbf{Knowledge Points}
+\begin{itemize}
+\item Function \href{https://code.kx.com/q/ref/til/}{\q{til}} 
+\item Return value of assignment operation\footnote{See section Syntax on this page: \url{https://code.kx.com/q/ref/assign/}}
+\item Each right \href{https://code.kx.com/q/ref/maps/#each-left-and-each-right}{\q{/:}}
+\item Type casting: \href{https://code.kx.com/q/ref/cast/}{\q{$}}
+\item Matrix entries must be of \q{float} type
+\end{itemize}
+\end{noteblock}
+
+\clearpage

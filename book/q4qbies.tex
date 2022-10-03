@@ -1,0 +1,72 @@
+\documentclass[a4paper,twoside]{scrbook}
+
+%\usepackage{xcolor}
+\usepackage{minted}
+\newcommand{\q}[1]{\mintinline{latex}{#1}}
+
+% https://ctan.mirrors.hoobly.com/macros/latex/contrib/titlesec/titlesec.pdf
+% https://tex.stackexchange.com/questions/27411/small-caps-and-bold-face
+\usepackage{bold-extra}
+\usepackage{titlesec}
+\titleformat{\section}
+  {\bfseries\scshape}{Example \thesection}{1em}{}
+
+\titleformat{\subsection}
+  {\bfseries}{}{0em}{}
+
+\usepackage{amsmath}
+\usepackage{verbatim}
+
+
+% https://tex.stackexchange.com/questions/229309/pdf-figure-will-not-scale
+\usepackage{graphicx}
+
+
+% https://www.nicholasnadeau.com/post/2018/08/admonition-blocks-making-your-documentation-stand-out/
+% https://mirrors.rit.edu/CTAN/graphics/awesomebox/awesomebox.pdf
+\usepackage{lipsum}
+\usepackage{awesomebox}
+\usepackage{alertmessage}
+
+% https://tex.stackexchange.com/questions/504154/how-can-i-get-footnotes-in-awesomebox
+\usepackage{footnote}
+\makesavenoteenv{tabular}
+\usepackage[bottom]{footmisc}
+\usepackage{perpage} %the perpage package
+\MakePerPage{footnote} %the perpage package command
+
+% hyperlink
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+\urlstyle{same}
+
+\newcounter{example}[section]
+\newenvironment{example}[1][]{\refstepcounter{example}\par\medskip  
+   \noindent \textbf{Example~\theexample. #1} \rmfamily \vspace{3mm}}{\medskip}
+
+
+
+\setlength\parindent{0pt}
+
+\begin{document}
+\title{q for qbies}
+\author{David Han}
+\frontmatter
+\maketitle
+\setcounter{tocdepth}{1}
+\tableofcontents
+\mainmatter
+
+\include{./chapter01/c01.tex}
+\include{./chapter02/c02.tex}
+\include{./chapter03/c03.tex}
+\include{./chapter04/c04.tex}
+
+\end{document}
