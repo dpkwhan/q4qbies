@@ -1,0 +1,8 @@
+// @author David Han
+// @kind function
+// @fileOverview Check whether a path is a file.
+// @param path {hsym} a path
+// @returns {boolean} True if the path is a file and false otherwise.
+{[path]
+  path~key path
+  }
