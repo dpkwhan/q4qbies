@@ -1,0 +1,7 @@
+// @author David Han
+// @kind function
+// @fileOverview Get the current working directory.
+// @returns {string} A directory
+{
+  system"cd"
+  }
