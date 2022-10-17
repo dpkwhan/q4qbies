@@ -9,7 +9,7 @@
 \usepackage{bold-extra}
 \usepackage{titlesec}
 \titleformat{\section}
-  {\bfseries\scshape}{Example \thesection}{1em}{}
+  {\Large\bfseries\scshape}{Recipe \thesection}{1em}{}
 
 \titleformat{\subsection}
   {\bfseries}{}{0em}{}
@@ -47,16 +47,14 @@
     }
 \urlstyle{same}
 
-\newcounter{example}[section]
-\newenvironment{example}[1][]{\refstepcounter{example}\par\medskip  
-   \noindent \textbf{Example~\theexample. #1} \rmfamily \vspace{3mm}}{\medskip}
-
-
+\newcounter{recipe}[section]
+\newenvironment{recipe}[1][]{\refstepcounter{recipe}\par\medskip  
+   \noindent \textbf{Recipe~\therecipe. #1} \rmfamily \vspace{3mm}}{\medskip}
 
 \setlength\parindent{0pt}
 
 \begin{document}
-\title{q for qbies}
+\title{Q Cookbook}
 \author{David Han}
 \frontmatter
 \maketitle
@@ -68,5 +66,6 @@
 \include{./chapter02/c02.tex}
 \include{./chapter03/c03.tex}
 \include{./chapter04/c04.tex}
+\include{./chapter05/c05.tex}
 
 \end{document}

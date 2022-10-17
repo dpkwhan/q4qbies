@@ -4,7 +4,7 @@
 In linear algebra, an identity matrix of size 3 looks like:
 
 $$
-\left[
+I_3 = \left[
 \begin{matrix}
 1 & 0 & 0\\
 0 & 1 & 0\\
@@ -13,17 +13,19 @@ $$
 \right]
 $$
 
+where the entries on the diagonal from the upper left to the bottom right are all $1$'s, and all other entries are $0$.
+
 
 \subsection{Implementation}
 Below is the function to create an identity matrix of any given size $n$.
 
 \begin{minted}[samepage,frame=single,framesep=10pt,xleftmargin=10pt,linenos]{q}
-.qe.math.identity:{[n]
+.math.identity:{[n]
   `float$v=/:v:til n
   };
 \end{minted}
 
-And the output \q{.qe.math.identity[4]} is
+And the output \q{.math.identity[4]} is
 
 \begin{verbatim}
 1 0 0 0 
@@ -40,7 +42,7 @@ Let's look at this function in details.
 \item \begin{minted}{q}
 v:til n
 \end{minted}
-\q{til n} returns all integers from zero up to $n$, but not including $n$ and assigns the list of integers to variable \q{v}. Note that the assignment operator returns the result of the expression assigned to $v$, which is later used by other expression to the left.
+\q{til n} returns a list of all integers from zero up to $n$, but not including $n$ and assigns the list of integers to variable \q{v}. Note that the assignment operator returns the result of the expression assigned to \q{v}, which is later used by other expression to the left.
 
 \item \begin{minted}{q}
 v=/:v
@@ -64,7 +66,7 @@ $$
 \begin{importantblock}
 \textbf{Important Note}
 \begin{itemize}
-\item For some matrix operators like \q{mmu}, \q{inv} and \q{$}, the matrix entries must of \q{float} type, \emph{i.e.} \q{all 9h=type each m} must be true if \q{m} is a matrix.
+\item For some matrix operators like matrix multiplication (\q{mmu}), matrix inverse (\q{inv}) and dot product (\q{$}), the matrix entries must of \q{float} type, \emph{i.e.} \q{all 9h=type each m} must be true if \q{m} is a matrix.
 \end{itemize}
 \end{importantblock}
 

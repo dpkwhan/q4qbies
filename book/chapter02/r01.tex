@@ -37,7 +37,7 @@ The \q{over} derives an accumulator from a binary function. In the example below
 \subsection{Dot apply again}
 This is basically the same as above except a few notable points:
 \begin{itemize}
-\item function \q{flip} is used to create a list of lists. In this case, the list has two elements and the first element will be used as key and the second element will be used value in the dictionary contruction. This is quite useful when you have a long list of keys/values and it is less error prone when a pair is used.
+\item Function \q{flip} is used to create a list of lists. In this case, the list has two elements and the first element will be used as key and the second element will be used value in the dictionary contruction. This is quite useful when you have a long list of keys/values and it is less error prone when a pair is used.
 \item Line 1 is basically a prefix notation \q{v[x;y]} and line 2 uses an infix notation \q{x v y} where the operator \q{v} is \q{.} apply.
 \end{itemize}
 \begin{minted}[frame=single,framesep=10pt,xleftmargin=10pt,linenos]{q}

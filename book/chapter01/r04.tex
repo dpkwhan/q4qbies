@@ -51,7 +51,7 @@ We write a function to compute the final price after discount for a given marked
 
 \begin{minted}[samepage,frame=single,framesep=10pt,xleftmargin=10pt,linenos]{q}
 // Implementation #1
-.qe.math.finalPrice1:{[mp]
+.math.finalPrice1:{[mp]
   prices:0 10 30 50 100 200;
   discounts:0.05 0.1 0.15 0.2 0.3 0.4;
   d:`s#prices!discounts;
@@ -62,7 +62,7 @@ We write a function to compute the final price after discount for a given marked
 Alternatively,
 \begin{minted}[samepage,frame=single,framesep=10pt,xleftmargin=10pt,linenos]{q}
 // Implementation #2
-.qe.math.finalPrice2:{[mp]
+.math.finalPrice2:{[mp]
   prices:0 10 30 50 100 200;
   discounts:0.05 0.1 0.15 0.2 0.3 0.4;
   mp*1-discounts prices bin mp

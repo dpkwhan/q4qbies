@@ -44,14 +44,14 @@ The function belows takes three arguments with $n \ge 2$:
 So there are $n$ data points in the above example and $(x_i,y_i)$ is the data point $i$.
 
 \begin{minted}[samepage,frame=single,framesep=10pt,xleftmargin=10pt,linenos]{q}
-.qe.math.pwlerp:{[x;y;z]
+.math.pwlerp:{[x;y;z]
   if[all x=asc x;'"First argument must be in ascending order"];
   if[z>=last x;:last y];
   if[z<=first x;:first y];
   i:bin[`float$x;`float$z];
   x:@[x;(i;i+1)];
   y:@[y;(i;i+1)];
-  .qe.math.lerp[x;y;z]
+  .math.lerp[x;y;z]
   };
 \end{minted}
 

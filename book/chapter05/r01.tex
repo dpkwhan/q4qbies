@@ -1,0 +1,41 @@
+\section{Access Secure Website}
+
+To get web contents from an http website is quite easy in q. For example, to get the contents of Google's homepage, it is as simple as below:
+
+\begin{minted}[frame=lines,framesep=10pt,xleftmargin=10pt]{q}
+q) .Q.hg`:http://www.google.com
+\end{minted}
+
+But to access a secure website, it won't work without some proper settings on SSL/TSL.
+
+\subsection{Step by step setup}
+\begin{itemize}
+\item Install \emph{mkcert} and create a locally-trusted development certificate. The instructions are here: \href{https://github.com/FiloSottile/mkcert}{https://github.com/FiloSottile/mkcert}
+\item Using Windows as example, set the following environment variables:
+\begin{minted}[frame=lines,framesep=10pt,xleftmargin=10pt]{batch}
+set SSL_CERT_FILE=C:\cert\example.com+4.pem
+set SSL_KEY_FILE=C:\cert\example.com+4-key.pem
+set SSL_VERIFY_SERVER=NO
+\end{minted}
+\item Launch q session as usual
+\begin{minted}[frame=lines,framesep=10pt,xleftmargin=10pt]{batch}
+q -p 5000
+\end{minted}
+
+\item Access Google's homepage securely:
+\begin{minted}[frame=lines,framesep=10pt,xleftmargin=10pt]{q}
+q) .Q.hg`:https://www.google.com
+\end{minted}
+\end{itemize}
+
+\subsection{Summary}
+
+\begin{noteblock}
+\textbf{Knowledge Points}
+\begin{itemize}
+\item Kx's knowledge base on \href{https://code.kx.com/q/kb/ssl/}{SSL/TLS}
+\item http get: \href{https://code.kx.com/q/ref/dotq/#qhg-http-get}{\q{.Q.hg}}
+\end{itemize}
+\end{noteblock}
+
+\clearpage

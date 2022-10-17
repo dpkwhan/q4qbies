@@ -32,7 +32,7 @@ Graphically,
 In the implementation below, no linear extrapolation is performed for values outside the interval $[x_0, x_1]$. All the parameters of this function are simple numerical numbers. The first parameter is the $x$-coordinates of two data points and the second parameter is the $y$-coordinates of the two data points. The third parameter is the $x$-coordinate for the point to perform linear interpolation.
 
 \begin{minted}[samepage,frame=single,framesep=10pt,xleftmargin=10pt,linenos]{q}
-.qe.math.lerp:{[x;y;z]
+.math.lerp:{[x;y;z]
   if[2<>count x;'"First argument must be a two-element list"];
   if[x[0]>x 1;'"First argument must be in ascending order"];
   if[not z within x;:$[z<x 0;y 0;y 1]];
