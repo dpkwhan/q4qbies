@@ -7,3 +7,4 @@ book/*.log
 book/*.bak
 book/*.out
 book/_minted-qCookbook/
+*.bak

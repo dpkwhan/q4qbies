@@ -1,0 +1,47 @@
+\section{Commafy Numbers}
+
+In English, commas are used to separate numbers with more than three digits in the whole-number part. A comma is used every third digit from the right before the decimal point if there is one.
+
+\subsection{Implementation}
+
+\begin{minted}[samepage,frame=single,framesep=10pt,xleftmargin=10pt,linenos]{q}
+.format.commafy:{
+  s:"." vs string abs x;
+  r:reverse","sv 0N 3#reverse s 0;
+  r:$[2=count s;"." sv (r;s 1);r];
+  $[x<0;"-",r;r]
+  };
+\end{minted}
+
+\subsection{Examples}
+Here are a few examples of how to use this function:
+
+\begin{minted}[frame=lines,framesep=10pt,xleftmargin=10pt]{q}
+q) .format.commafy -1234.56
+"-1,234.56"
+
+q) .format.commafy 1234567
+"1,234,567"
+
+q) .format.commafy 1.2e5
+"120,000"
+\end{minted}
+
+\subsection{Explanations}
+\begin{itemize}
+\item Line 2 first convert the absolute value of the input number to string format and split the number by dot, \emph{i.e.} separating the whole-number part and decimal part.
+\item Line 3 reverses the order of all digits in the whole-number part and splits them into trios, \emph{i.e.} each group has three digits except the last group if the total number of digits is not a multiple of 3. It then concatenates all trios with a comma. Finally it reverses the order back to their original order.
+\item Line 4 checks whether there is a decimal point in the orginal number. If so, combine the whole-number part and decimal part. 
+\item Line 5 adds back the negative sign if the original input number is negative.
+\end{itemize}
+
+\subsection{Summary}
+\begin{noteblock}
+\textbf{Knowledge Points}
+\begin{itemize}
+\item Operators: \href{https://code.kx.com/q/ref/cond/}{\q{$}} and \href{https://code.kx.com/q/ref/cut/}{\#}
+\item Functions: \href{https://code.kx.com/q/ref/abs/}{\q{abs}}, \href{https://code.kx.com/q/ref/string/}{\q{string}}, \href{https://code.kx.com/q/ref/vs/}{\q{vs}}, \href{https://code.kx.com/q/ref/sv/}{\q{sv}}, \href{https://code.kx.com/q/ref/count/}{\q{count}} and \href{https://code.kx.com/q/ref/reverse/}{\q{reverse}}
+\end{itemize}
+\end{noteblock}
+
+\clearpage

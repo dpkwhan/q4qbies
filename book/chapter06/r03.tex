@@ -1,0 +1,74 @@
+\section{Zero Padding}
+
+The RIC (Reuters Instrument Code) code for stocks traded in Hong Kong Stock Exchange has \textbf{four} digits before the dot. For example, the RIC code for HSBC is \q{0005.HK}. Given the snippet of a table like below, we want to add another column called \q{ric} to this table.
+
+\begin{minted}[samepage,frame=single,framesep=10pt,xleftmargin=10pt]{q}
+q) master:([]sym:`5`11;code:`HK);
+q) master
+sym code
+--------
+5   HK
+11  HK
+\end{minted}
+
+After adding the \q{ric} column, the table looks like:
+\begin{minted}[samepage,frame=single,framesep=10pt,xleftmargin=10pt]{q}
+sym code ric
+----------------
+5   HK   0005.HK
+11  HK   0011.HK
+\end{minted}
+
+\subsection{Implementation}
+Three different approaches are suggested to zero pad the \q{sym} with less than $4$ digits.
+
+\begin{minted}[samepage,frame=single,framesep=10pt,xleftmargin=10pt,linenos]{q}
+master:update ric:{` sv x} each flip (sym;code) from master;
+
+// Implementation #1
+update {`$"0"^-7$x} each string ric from master
+
+// Implementation #2
+update {`$-7#"000",x} each string ric from master
+
+// Implementation #3
+update {`$count[x]_"0000000",x} each string ric from master
+\end{minted}
+
+\subsection{Explanations}
+\begin{itemize}
+\item Line 1 adds a new column \q{ric} by concatenating the \q{sym} and \q{code} with a dot. Note that \q{x} in the anonymous function is a two-element symbol list and with null symbol (\q{`}) as the left argument, \q{sv} concatenates elements of symbol list using a dot. This is still not what we want yet since the values for \q{sym} column with less than 4 digits is not zero padded to have a total of 4 digits. 
+\item Line 4 first pre-appends spaces so that the length of the resulting string is exactly 7 and then uses \q{"0"} replace the spaces with operator (\q{^}). Note that the coalesce operator (\q{^}) replaces the null values in the right argument with values from the left argument and the null value of \q{string} is a single space (\q{" "}). 
+\item Line 7 first pre-appends three \q{0}'s so that the length of the resulting string is not less than 7 and then the last 7 characters are kept.
+\item Line 10 first pre-appends seven \q{0}'s and drops the extra \q{0}'s in the front so that the length of the resulting string is 7.
+\end{itemize}
+
+
+\subsection{Summary}
+
+\begin{noteblock}
+\textbf{Knowledge Points}
+\begin{itemize}
+\item Operators: \href{https://code.kx.com/q/ref/coalesce/}{\q{^}}, \href{https://code.kx.com/q/ref/drop/}{\q{_}} and \href{https://code.kx.com/q/ref/take/}{\#}
+\item Operator \q{$}: \href{https://code.kx.com/q/ref/cast/}{Type casting} and \href{https://code.kx.com/q/ref/pad/}{Pad}
+\item Functions: \href{https://code.kx.com/q/ref/count/}{\q{count}}, \href{https://code.kx.com/q/ref/string/}{\q{string}}, \href{https://code.kx.com/q/ref/each/}{\q{each}} and \href{https://code.kx.com/q/ref/flip/}{\q{flip}}
+\end{itemize}
+\end{noteblock}
+
+\subsection{Extras}
+\begin{tipblock}
+A convenient function \href{https://code.kx.com/q/ref/dotq/#qdd-join-symbols}{\q{.Q.dd}} makes joining symbols easier. For example, you can use the following to replace Line 1:
+\begin{minted}[frame=lines,framesep=10pt,xleftmargin=10pt]{q}
+update ric:.Q.dd'[sym;code] from master
+\end{minted}
+
+Another example:
+\begin{minted}[frame=lines,framesep=10pt,xleftmargin=10pt]{q}
+q) .Q.dd[`IBM]"N"
+`IBM.N
+q) .Q.dd[`IBM]`N
+`IBM.N
+\end{minted}
+\end{tipblock}
+
+\clearpage
